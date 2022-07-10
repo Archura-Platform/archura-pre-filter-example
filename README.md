@@ -1,2 +1,2 @@
 # archura-pre-filter-example
-Archura Pre Filter Example
+Archura Platform Pre Filter example.
