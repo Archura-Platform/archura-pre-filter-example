@@ -1,37 +1,30 @@
 package io.archura.platform;
 
+import io.archura.platform.context.Context;
 import io.archura.platform.function.Configurable;
+import io.archura.platform.logging.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.function.ServerRequest;
 
-import java.util.Date;
 import java.util.Map;
 import java.util.function.Consumer;
 
 @Component
 public class SimplePreFilter implements Consumer<ServerRequest>, Configurable {
 
-    public SimplePreFilter() {
-        log("hashCode: " + this.hashCode() + ", Constructor");
-    }
+    private Map<String, Object> configuration;
 
     @Override
-    public void accept(ServerRequest serverRequest) {
-        log("hashCode: " + this.hashCode() + ", serverRequest = " + serverRequest);
+    public void accept(ServerRequest request) {
+        final Context context = (Context) request.attributes().get(Context.class.getSimpleName());
+        final Logger logger = context.getLogger();
+
+        logger.info("request = " + request + " configuration = " + configuration);
     }
 
     @Override
     public void setConfiguration(Map<String, Object> configuration) {
-        log("hashCode: " + this.hashCode() + ", configuration = " + configuration);
+        this.configuration = configuration;
     }
 
-    private void log(final String log) {
-        String message = String.format("[%s] [%s-%s] [%s]: %s",
-                new Date(),
-                Thread.currentThread().getId(),
-                Thread.currentThread().getName(),
-                this.getClass().getSimpleName(),
-                log);
-        System.out.println(message);
-    }
 }
