@@ -12,17 +12,17 @@ import java.util.function.Consumer;
 public class SimplePreFilter implements Consumer<ServerRequest>, Configurable {
 
     public SimplePreFilter() {
-        log("SimplePreFilter: " + this.hashCode() + ", Constructor");
+        log("hashCode: " + this.hashCode() + ", Constructor");
     }
 
     @Override
     public void accept(ServerRequest serverRequest) {
-        log("SimplePreFilter: " + this.hashCode() + ", serverRequest = " + serverRequest);
+        log("hashCode: " + this.hashCode() + ", serverRequest = " + serverRequest);
     }
 
     @Override
     public void setConfiguration(Map<String, Object> configuration) {
-        log("SimplePreFilter: " + this.hashCode() + ", configuration = " + configuration);
+        log("hashCode: " + this.hashCode() + ", configuration = " + configuration);
     }
 
     private void log(final String log) {
